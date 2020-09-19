@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wszystkie przepisy</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+<div class="jumbotron">
+    <h1 class="display-4">Wirtualna książka kucharska</h1>
+    <p class="lead">Witaj Szanowna Użytkowniczko! Witaj Szanowny Użytkowniku! Zapraszamy do zapoznania się ze stroną! </p>
+    <hr class="my-4">
+    <p>Strona pełna wspaniałego smaku</p>
+    <a class="btn btn-primary btn-lg" href="index.html" role="button">Strona Główna</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Zobacz wszystkie przepisy</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Dodaj swój przepis</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Edytuj przepis</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Usuń przepis</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Kategorie przepisów</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Wyświetl przepis</a>
+</div>
+<div style="text-align: center;">
+<p class="lead">Lista wszystkich przepisów </p>
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Nr przepisu</th>
+        <th scope="col">Nazwa</th>
+        <th scope="col">Kategoria</th>
+        <th scope="col">Trudność</th>
+        <th scope="col">Czas</th>
+        <th scope="col"> </th>
+        <th scope="col">Składniki</th>
+        <th scope="col">Przygotowanie</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="recipe :${all_recipe}">
+        <td th:text="${recipe.getId()}">Mark</td>
+        <td th:text="${recipe.getDishName()}">Mark</td>
+        <td th:text="${recipe.getFoodCategory()}">Mark</td>
+        <td th:text="${recipe.getDifficultyLevel()}">Mark</td>
+        <td th:text="${recipe.getTime()}">Mark</td>
+        <th scope="row">min</th>
+<!--        <td th:text="${recipe.getIngredientsList()}">Mark</td>-->
+<!--        <td th:text="${recipe.getStepsList()}">Mark</td>-->
+    </tr>
+    <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
