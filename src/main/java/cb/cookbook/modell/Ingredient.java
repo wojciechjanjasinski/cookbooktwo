@@ -1,5 +1,6 @@
 package cb.cookbook.modell;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,8 +11,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-
+@ToString(exclude = "recipe")
 public class Ingredient {
 
     @Id
@@ -20,6 +20,7 @@ public class Ingredient {
     private String name;
     private BigDecimal amount;
     private String unitName;
+
 
     @ManyToOne
     private Recipe recipe;

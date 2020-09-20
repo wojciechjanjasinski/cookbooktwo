@@ -1,5 +1,6 @@
 package cb.cookbook.modell;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(exclude = "recipe")
 public class Step {
 
     @Id
@@ -19,4 +20,6 @@ public class Step {
 
     @ManyToOne
     private Recipe recipe;
+
+
 }

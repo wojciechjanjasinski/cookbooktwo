@@ -1,7 +1,9 @@
 package cb.cookbook.controller;
 
 import cb.cookbook.modell.*;
+import cb.cookbook.repository.IngredientRepository;
 import cb.cookbook.repository.RecipeRepository;
+import cb.cookbook.repository.StepRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +17,13 @@ import java.util.Optional;
 public class HomeController {
 
     private RecipeRepository recipeRepository;
+    private IngredientRepository ingredientRepository;
+    private StepRepository stepRepository;
 
-    public HomeController(RecipeRepository recipeRepository) {
+    public HomeController(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, StepRepository stepRepository) {
         this.recipeRepository = recipeRepository;
+        this.ingredientRepository = ingredientRepository;
+        this.stepRepository = stepRepository;
     }
 
     @GetMapping
@@ -33,16 +39,20 @@ public class HomeController {
     }
 
     @GetMapping("/add")
-    public String addRecipe(Model model){
+    public String addRecipe(Model model, Ingredient ingredient, Step step){
         Recipe recipe = new Recipe();
         model.addAttribute("recipe", recipe);
+        recipe.addIngredientAndStep(ingredient, step);
+        //recipe.addStep(step);
+        model.addAttribute("ingredient", ingredient);
+        model.addAttribute("step", step);
         return "add";
     }
 
     @PostMapping("/add")
     String addRecipe(Recipe recipe) {
         recipeRepository.save(recipe);
-        return "redirect:/all";
+        return "redirect:/cookbook/all";
     }
 
     @PutMapping("update/{id}")

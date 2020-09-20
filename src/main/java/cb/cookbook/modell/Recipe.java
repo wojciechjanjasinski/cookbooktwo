@@ -1,5 +1,6 @@
 package cb.cookbook.modell;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,9 +30,20 @@ public class Recipe {
     private BigDecimal time;
 
     @OneToMany(mappedBy = "recipe")
-    List<Ingredient> ingredientsList;
+    List<Ingredient> ingredientsList = new ArrayList<>();
 
     @OneToMany(mappedBy = "recipe")
-    List<Step> stepsList;
+    List<Step> stepsList = new ArrayList<>();
+
+    public void addIngredientAndStep(Ingredient ingredient, Step step){
+        ingredientsList.add(ingredient);
+        ingredient.setRecipe(this);
+        stepsList.add(step);
+        step.setRecipe(this);
+    }
+
+    public void addStep(Step step){
+
+    }
 }
 // klucz obcy zostanie umieszczony tutaj

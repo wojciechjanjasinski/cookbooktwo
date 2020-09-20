@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Dodaj przepis</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
 <div class="jumbotron">
     <h1 class="display-4">Wirtualna książka kucharska</h1>
-    <p class="lead">Witaj Szanowna Użytkowniczko! Witaj Szanowny Użytkowniku! Zapraszamy do zapoznania się ze stroną! </p>
+    <p class="lead">Witaj Szanowna Użytkowniczko! Witaj Szanowny Użytkowniku! Zapraszamy do zapoznania się ze
+        stroną! </p>
     <hr class="my-4">
     <p>Strona pełna wspaniałego smaku</p>
     <a class="btn btn-primary btn-lg" href="index.html" role="button">Strona Główna</a>
@@ -19,6 +21,87 @@
     <a class="btn btn-primary btn-lg" href="#" role="button">Kategorie przepisów</a>
     <a class="btn btn-primary btn-lg" href="#" role="button">Wyświetl przepis</a>
 </div>
+<div class="d-flex justify-content-center">
+    <form method="post" th:action="@{/cookbook/add}" th:object="${recipe}">
+        <div class="form-row">
 
+        </div>
+        <div class="form-group">
+            <label>Nazwa przepisu:</label>
+            <input type="text" class="form-control" th:field="*{dishName}" placeholder="np. sernik z rodzynkami">
+        </div>
+        <div class="foodCategory">
+            <label>Kategoria:</label>
+            <select name="goalStatus">
+                <option th:each="category:${T(cb.cookbook.modell.FoodCategory).values()}"
+                        th:text="${category}"
+                        th:value="${category}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Poziom trudności:</label>
+            <select name="difficultyLevel">
+                <option th:each="level:${T(cb.cookbook.modell.DifficultyLevel).values()}"
+                        th:text="${level}"
+                        th:value="${level}">
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Czas:</label>
+            <input type="number" class="form-control" th:field="*{time}" placeholder="w minutach">
+        </div>
+        <th:block th:each="ingredient,i : ${recipe.ingredientsList}">
+            <label>
+                <input type="text" th:field="*{ingredientsList[__${i.index}__].name}" />
+            </label>Nazwa składnika<br />
+            <label>
+                <input type="number" th:field="*{ingredientsList[__${i.index}__].amount}" />
+            </label>ilość<br />
+            <label>
+                <input type="text" th:field="*{ingredientsList[__${i.index}__].unitName}" />
+            </label>nazwa jednostek<br />
+            <label>
+                <input type="number" th:field="*{ingredientsList[__${i.index}__].recipe}" />
+            </label>Id przepisu<br />
+        </th:block>
+        <th:block th:each="ingredient,i : ${recipe.stepsList}">
+            <label>
+                <input type="text" th:field="*{stepsList[__${i.index}__].description}" />
+            </label>Nazwa składnika<br />
+            <label>
+                <input type="number" th:field="*{stepsList[__${i.index}__].recipe}" />
+            </label>ilość<br />
+        </th:block>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+
+
+
+    </form>
+        <form method="post" th:action="@{/cookbook/add}" th:object="${ingredient}">
+            <div class="form-row">
+
+            </div>
+            <div class="form-group">
+                <label>Nazwa składnika:</label>
+                <input type="text" class="form-control" th:value="${ingredient.name}" th:field="*{name}" placeholder="np. sól">
+            </div>
+            <div class="form-group">
+                <label>ilość:</label>
+                <input type="number" class="form-control" th:field="*{amount}" placeholder="ilość">
+            </div>
+            <div class="form-group">
+                <label>Nazwa jednostki:</label>
+                <input type="text" class="form-control" th:field="*{unitName}" placeholder="jednostka miary">
+            </div>
+            <div class="form-group">
+                <label>numer id przepisu</label>
+                <input type="number" class="form-control" th:field="*{recipe}" placeholder="ilość">
+            </div>
+
+        <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+</div>
 </body>
 </html>
