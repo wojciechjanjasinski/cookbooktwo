@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="">
 <head>
     <meta charset="UTF-8">
     <title>Dodaj przepis</title>
@@ -52,7 +52,7 @@
             <label>Czas:</label>
             <input type="number" class="form-control" th:field="*{time}" placeholder="w minutach">
         </div>
-        <th:block th:each="ingredient,i : ${recipe.ingredientsList}">
+        <th:block th:action="@{/cookbook/add}" th:object="${recipe}" th:each="ingredient,i : ${recipe.ingredientsList}">
             <label>
                 <input type="text" th:field="*{ingredientsList[__${i.index}__].name}" />
             </label>Nazwa składnika<br />
@@ -69,37 +69,11 @@
         <th:block th:each="ingredient,i : ${recipe.stepsList}">
             <label>
                 <input type="text" th:field="*{stepsList[__${i.index}__].description}" />
-            </label>Nazwa składnika<br />
+            </label>Opis przygotowania<br />
             <label>
                 <input type="number" th:field="*{stepsList[__${i.index}__].recipe}" />
-            </label>ilość<br />
+            </label>Id przepisu<br />
         </th:block>
-        <button type="submit" class="btn btn-primary">Sign in</button>
-
-
-
-    </form>
-        <form method="post" th:action="@{/cookbook/add}" th:object="${ingredient}">
-            <div class="form-row">
-
-            </div>
-            <div class="form-group">
-                <label>Nazwa składnika:</label>
-                <input type="text" class="form-control" th:value="${ingredient.name}" th:field="*{name}" placeholder="np. sól">
-            </div>
-            <div class="form-group">
-                <label>ilość:</label>
-                <input type="number" class="form-control" th:field="*{amount}" placeholder="ilość">
-            </div>
-            <div class="form-group">
-                <label>Nazwa jednostki:</label>
-                <input type="text" class="form-control" th:field="*{unitName}" placeholder="jednostka miary">
-            </div>
-            <div class="form-group">
-                <label>numer id przepisu</label>
-                <input type="number" class="form-control" th:field="*{recipe}" placeholder="ilość">
-            </div>
-
         <button type="submit" class="btn btn-primary">Sign in</button>
     </form>
 </div>

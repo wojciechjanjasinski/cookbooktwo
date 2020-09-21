@@ -29,10 +29,10 @@ public class Recipe {
 
     private BigDecimal time;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.MERGE)
     List<Ingredient> ingredientsList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.MERGE)
     List<Step> stepsList = new ArrayList<>();
 
     public void addIngredientAndStep(Ingredient ingredient, Step step){
