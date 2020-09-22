@@ -29,21 +29,15 @@ public class Recipe {
 
     private BigDecimal time;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.MERGE)
-    List<Ingredient> ingredientsList = new ArrayList<>();
+    private String preparationDescription;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.MERGE)
-    List<Step> stepsList = new ArrayList<>();
+    private List<Ingredient> ingredientsList = new ArrayList<>();
 
-    public void addIngredientAndStep(Ingredient ingredient, Step step){
+    public void addIngredient(Ingredient ingredient){
         ingredientsList.add(ingredient);
         ingredient.setRecipe(this);
-        stepsList.add(step);
-        step.setRecipe(this);
     }
 
-    public void addStep(Step step){
-
-    }
 }
 // klucz obcy zostanie umieszczony tutaj

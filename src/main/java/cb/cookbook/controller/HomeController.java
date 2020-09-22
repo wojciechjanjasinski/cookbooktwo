@@ -1,9 +1,8 @@
 package cb.cookbook.controller;
 
+import cb.cookbook.dto.IngredientCreationDto;
 import cb.cookbook.modell.*;
-import cb.cookbook.repository.IngredientRepository;
 import cb.cookbook.repository.RecipeRepository;
-import cb.cookbook.repository.StepRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,36 +16,28 @@ import java.util.Optional;
 public class HomeController {
 
     private RecipeRepository recipeRepository;
-    private IngredientRepository ingredientRepository;
-    private StepRepository stepRepository;
 
-    public HomeController(RecipeRepository recipeRepository, IngredientRepository ingredientRepository, StepRepository stepRepository) {
+    public HomeController(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
-        this.ingredientRepository = ingredientRepository;
-        this.stepRepository = stepRepository;
     }
 
     @GetMapping
-    public String start(){
+    String start(){
         return "/index";
     }
 
     @GetMapping("/all")
-    public String findAll (Model model){
+    String findAll (Model model){
         List<Recipe> all = recipeRepository.findAll();
         model.addAttribute("all_recipe", all);
         return "/all";
     }
 
     @GetMapping("/add")
-    public String addRecipe(Model model, Ingredient ingredient, Step step){
+    String addRecipe(Model model){
         Recipe recipe = new Recipe();
         model.addAttribute("recipe", recipe);
-        recipe.addIngredientAndStep(ingredient, step);
-        //recipe.addStep(step);
-        model.addAttribute("ingredient", ingredient);
-        model.addAttribute("step", step);
-        return "add";
+        return "/add";
     }
 
     @PostMapping("/add")
@@ -55,25 +46,34 @@ public class HomeController {
         return "redirect:/cookbook/all";
     }
 
-    @PutMapping("update/{id}")
+    @GetMapping("/ingredient-add")
+    public String showCreatForm(Model model){
+        IngredientCreationDto ingredientCreationDto = new IngredientCreationDto();
+
+        for (int i = 1; i <= 15; i++){
+            ingredientCreationDto.addIngredient(new Ingredient());
+        }
+        model.addAttribute("ingredientForm", ingredientCreationDto);
+        return "/ingredient-add";
+    }
+
+    @PostMapping("/update/{id}")
     String updateRecipe(@PathVariable Long id,
                         @RequestParam(required = false) String dishName,
                         @RequestParam(required = false) FoodCategory foodCategory,
                         @RequestParam(required = false)DifficultyLevel difficultyLevel,
                         @RequestParam(required = false)BigDecimal time,
-                        @RequestParam(required = false)List<Ingredient> ingredientsList,
-                        @RequestParam(required = false)List<Step> stepsList){
+                        @RequestParam(required = false)List<Ingredient> ingredientsList){
         Recipe recipeToUpdate = recipeRepository.getOne(id);
         recipeToUpdate.setDishName(dishName);
         recipeToUpdate.setFoodCategory(foodCategory);
         recipeToUpdate.setDifficultyLevel(difficultyLevel);
         recipeToUpdate.setTime(time);
         recipeToUpdate.setIngredientsList(ingredientsList);
-        recipeToUpdate.setStepsList(stepsList);
         return "{id}";
     }
 
-    @DeleteMapping("delete/{id}")
+    @PostMapping("delete/{id}")
     String deleteRecipe(@PathVariable Long id){
         recipeRepository.deleteById(id);
         return "redirect:/successful-delate";
