@@ -1,20 +1,30 @@
 package cb.cookbook.dto;
 
 import cb.cookbook.modell.Ingredient;
-import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-//@ToString
 public class IngredientCreationDto {
-    private List<Ingredient> ingredients;
-
+    private List<Ingredient> ingredients = new ArrayList<>();
 
     public void addIngredient(Ingredient ingredient) {
         this.ingredients.add(ingredient);
     }
+
+    public IngredientCreationDto() {
+    }
+
+    public IngredientCreationDto(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
 }

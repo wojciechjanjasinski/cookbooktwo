@@ -20,11 +20,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="ingredient, itemStat : *{ingredients}">
-                <td><input th:field="*{ingredients[__${itemStat.index}__].name}" /></td>
-                <td><input th:field="*{ingredients[__${itemStat.index}__].amount}" /></td>
-                <td><input th:field="*{ingredients[__${itemStat.index}__].unitName}" /></td>
-                <td><input th:field="*{ingredients[__${itemStat.index}__].recipe}" /></td>
+            <tr th:each="ingredient, itemStat : *{ingredientsList}">
+                <td><input th:field="*{ingredientsList[__${itemStat.index}__].name}" /></td>
+                <td><input th:field="*{ingredientsList[__${itemStat.index}__].amount}" /></td>
+                <td><input th:field="*{ingredientsList[__${itemStat.index}__].unitName}" /></td>
+                <td><input th:field="*{ingredientsList[__${itemStat.index}__].recipe}" /></td>
             </tr>
             </tbody>
         </table>

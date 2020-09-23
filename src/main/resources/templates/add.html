@@ -61,6 +61,26 @@
             </label>
         </div>
         <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Nazwa składnika</th>
+                        <th>ilość</th>
+                        <th>nazwa jednostki</th>
+                        <th>id przepisu</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ingredient, itemStat : *{ingredientsList}">
+                        <td><input th:field="*{ingredientsList[__${itemStat.index}__].name}" /></td>
+                        <td><input th:field="*{ingredientsList[__${itemStat.index}__].amount}" /></td>
+                        <td><input th:field="*{ingredientsList[__${itemStat.index}__].unitName}" /></td>
+                        <td><input th:field="*{ingredientsList[__${itemStat.index}__].recipe}" /></td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+        <div>
         <button type="submit" class="btn btn-primary">Sign in</button>
         </div>
     </form>
