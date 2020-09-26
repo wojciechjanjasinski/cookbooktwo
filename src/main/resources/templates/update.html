@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Zmodyfikuj przepis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+<div class="jumbotron">
+    <h1 class="display-4">Wirtualna książka kucharska</h1>
+    <p class="lead">Witaj Szanowna Użytkowniczko! Witaj Szanowny Użytkowniku! Zapraszamy do zapoznania się ze
+        stroną! </p>
+    <hr class="my-4">
+    <p>Strona pełna wspaniałego smaku</p>
+    <a class="btn btn-primary btn-lg" href="index.html" role="button">Strona Główna</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Zobacz wszystkie przepisy</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Dodaj swój przepis</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Edytuj przepis</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Usuń przepis</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Kategorie przepisów</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Wyświetl przepis</a>
+</div>
+<div class="d-flex justify-content-center">
+    <form method="post" action="#" th:action="@{/cookbook/update/{id}(id=${recipe.id})}" th:object="${recipe}">
+        <div class="form-row">
+
+        </div>
+        <div class="form-group">
+            <label>Nazwa przepisu:</label>
+            <label>
+                <input type="text" class="form-control" th:field="*{dishName}" placeholder="np. sernik z rodzynkami">
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Kategoria:</label>
+            <label>
+                <select name="foodCategory">
+                    <option th:each="category:${T(cb.cookbook.modell.FoodCategory).values()}"
+                            th:text="${category}"
+                            th:value="${category}">
+                    </option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Poziom trudności:</label>
+            <label>
+                <select name="difficultyLevel">
+                    <option th:each="level:${T(cb.cookbook.modell.DifficultyLevel).values()}"
+                            th:text="${level}"
+                            th:value="${level}">
+                    </option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>Czas:</label>
+            <label>
+                <input type="number" class="form-control" th:field="*{time}" placeholder="w minutach">
+            </label>
+        </div>
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Nazwa składnika</th>
+                    <th>ilość</th>
+                    <th>nazwa jednostki</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ingredient, itemStat : *{ingredientsList}">
+                    <td><input th:field="*{ingredientsList[__${itemStat.index}__].name}" /></td>
+                    <td><input th:field="*{ingredientsList[__${itemStat.index}__].amount}" /></td>
+                    <td><input th:field="*{ingredientsList[__${itemStat.index}__].unitName}" /></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

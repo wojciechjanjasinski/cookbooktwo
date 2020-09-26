@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj przepis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+<div class="jumbotron">
+    <h1 class="display-4">Wirtualna książka kucharska</h1>
+    <p class="lead">Witaj Szanowna Użytkowniczko! Witaj Szanowny Użytkowniku! Zapraszamy do zapoznania się ze
+        stroną! </p>
+    <hr class="my-4">
+    <p>Strona pełna wspaniałego smaku</p>
+    <a class="btn btn-primary btn-lg" href="index.html" role="button">Strona Główna</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Zobacz wszystkie przepisy</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Dodaj swój przepis</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Edytuj przepis</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Usuń przepis</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Kategorie przepisów</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Wyświetl przepis</a>
+    <form>
+        <div class="form-row align-items-center">
+            <div class="col-auto my-1">
+                <label class="mr-sm-2" for="foodCategory">Wybierz prosze kategorię przepisów</label>
+                <select class="custom-select mr-sm-2" id="foodCategory">
+                    <option th:each="category:${category}"
+                            th:text="${category}"
+                            th:value="${category}">
+                    </option>
+                </select>
+            </div>
+            <div class="col-auto my-1">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
