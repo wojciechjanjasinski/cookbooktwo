@@ -11,7 +11,6 @@ import javax.persistence.OneToMany;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -31,8 +30,9 @@ public class Recipe {
 
     private String preparationDescription;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private List<Ingredient> ingredientsList = new ArrayList<>();
+
 
     public void addIngredient(Ingredient ingredient) {
         this.ingredientsList.add(ingredient);

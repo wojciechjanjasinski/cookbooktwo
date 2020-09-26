@@ -32,10 +32,10 @@
                 <input type="text" class="form-control" th:field="*{dishName}" placeholder="np. sernik z rodzynkami">
             </label>
         </div>
-        <div class="foodCategory">
+        <div class="form-group">
             <label>Kategoria:</label>
             <label>
-                <select name="goalStatus">
+                <select name="foodCategory">
                     <option th:each="category:${T(cb.cookbook.modell.FoodCategory).values()}"
                             th:text="${category}"
                             th:value="${category}">
@@ -67,7 +67,6 @@
                         <th>Nazwa składnika</th>
                         <th>ilość</th>
                         <th>nazwa jednostki</th>
-                        <th>id przepisu</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -75,7 +74,6 @@
                         <td><input th:field="*{ingredientsList[__${itemStat.index}__].name}" /></td>
                         <td><input th:field="*{ingredientsList[__${itemStat.index}__].amount}" /></td>
                         <td><input th:field="*{ingredientsList[__${itemStat.index}__].unitName}" /></td>
-                        <td><input th:field="*{ingredientsList[__${itemStat.index}__].recipe}" /></td>
                     </tr>
                     </tbody>
                 </table>

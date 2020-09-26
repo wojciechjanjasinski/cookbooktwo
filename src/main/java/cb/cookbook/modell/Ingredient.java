@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
@@ -19,6 +20,7 @@ public class Ingredient {
 
 
     @ManyToOne
+    @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
 
     public Ingredient() {
