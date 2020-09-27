@@ -52,6 +52,12 @@ public class HomeController {
         return "redirect:/cookbook/all";
     }
 
+    @GetMapping("/basic-update")
+    String showAllPossibleUpdate(Model model) {
+        List<Recipe> all = recipeRepository.findAll();
+        model.addAttribute("all_recipe", all);
+        return "/basic-update";
+    }
 
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
@@ -75,10 +81,16 @@ public class HomeController {
                     recipe.setIngredientsList(recipeRequest.getIngredientsList());
                     recipe.getIngredientsList().stream().forEach(ingredient -> ingredient.setRecipe(recipe));
                     return recipeRepository.save(recipe);
-                }).orElseThrow(()-> new ResourceNotFoundException("Przepis o numerze" + id + "nie został znaleziony"));
+                }).orElseThrow(() -> new ResourceNotFoundException("Przepis o numerze" + id + "nie został znaleziony"));
         return "redirect:/cookbook/all";
     }
 
+    @GetMapping("/basic-delete")
+    String showAllPossibleDelete(Model model) {
+        List<Recipe> all = recipeRepository.findAll();
+        model.addAttribute("all_recipe", all);
+        return "/basic-delete";
+    }
 
     @GetMapping("/delete/{id}")
     String deleteForm(@PathVariable Long id, Model model) {
@@ -91,15 +103,22 @@ public class HomeController {
     @PostMapping("delete/{id}")
     String deleteRecipe(@PathVariable Long id, Model model) {
         Recipe recipe = recipeRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("wprowadzono niepoprawny numer id:" + id));
+                .orElseThrow(() -> new IllegalArgumentException("wprowadzono niepoprawny numer id:" + id));
         recipeRepository.delete(recipe);
         model.addAttribute("recipe", recipe);
         return "redirect:/cookbook/successful-delete";
     }
 
     @GetMapping("/successful-delete")
-    String successfulDelete(){
+    String successfulDelete() {
         return "/successful-delete";
+    }
+
+    @GetMapping("/basic-show")
+    String showAllPossibleToOne(Model model) {
+        List<Recipe> all = recipeRepository.findAll();
+        model.addAttribute("all_recipe", all);
+        return "/basic-show";
     }
 
     @GetMapping("/findOne/{id}")
@@ -111,72 +130,56 @@ public class HomeController {
     }
 
     @GetMapping("/category-polish")
-    String showPolishFoodCategory(Model model){
-        //String description = "Polskie jedzenie itp."; html
-        //picture html
+    String showPolishFoodCategory(Model model) {
         recipeRepository.findAllPolish();
         model.addAttribute("polish", recipeRepository.findAllPolish());
         return "/category-polish";
     }
 
     @GetMapping("/category-french")
-    String showFrenchFoodCategory(Model model){
-        //String description = "Polskie jedzenie itp."; html
-        //picture html
+    String showFrenchFoodCategory(Model model) {
         recipeRepository.findAllFrench();
         model.addAttribute("french", recipeRepository.findAllFrench());
         return "/category-french";
     }
 
     @GetMapping("/category-british")
-    String showBritishFoodCategory(Model model){
-        //String description = "Polskie jedzenie itp."; html
-        //picture html
+    String showBritishFoodCategory(Model model) {
         recipeRepository.findAllBritish();
         model.addAttribute("british", recipeRepository.findAllBritish());
         return "/category-british";
     }
 
     @GetMapping("/category-italian")
-    String showItalianFoodCategory(Model model){
-        //String description = "Polskie jedzenie itp."; html
-        //picture html
+    String showItalianFoodCategory(Model model) {
         recipeRepository.findAllItalian();
         model.addAttribute("italian", recipeRepository.findAllItalian());
         return "/category-italian";
     }
 
     @GetMapping("/category-mediterranean")
-    String showMediterraneanFoodCategory(Model model){
-        //String description = "Polskie jedzenie itp."; html
-        //picture html
+    String showMediterraneanFoodCategory(Model model) {
         recipeRepository.findAllMediterranean();
         model.addAttribute("mediterranean", recipeRepository.findAllMediterranean());
         return "/category-mediterranean";
     }
 
     @GetMapping("/category-american")
-    String showAmericanFoodCategory(Model model){
-        //String description = "Polskie jedzenie itp."; html
-        //picture html
+    String showAmericanFoodCategory(Model model) {
         recipeRepository.findAllAmerican();
         model.addAttribute("american", recipeRepository.findAllAmerican());
         return "/category-american";
     }
 
     @GetMapping("/category-mexican")
-    String showMexicanFoodCategory(Model model){
-        //String description = "Polskie jedzenie itp."; html
-        //picture html
+    String showMexicanFoodCategory(Model model) {
         recipeRepository.findAllMexican();
         model.addAttribute("mexican", recipeRepository.findAllMexican());
         return "/category-mexican";
     }
 
     @GetMapping("/category-sweet")
-    String showSweetFoodCategory(Model model){
-        //String description = "Polskie jedzenie itp."; html
-        //picture html
+    String showSweetFoodCategory(Model model) {
         recipeRepository.findAllSweat();
         model.addAttribute("sweet", recipeRepository.findAllSweat());
         return "/category-sweet";

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Dodaj przepis</title>
@@ -13,29 +13,22 @@
         stroną! </p>
     <hr class="my-4">
     <p>Strona pełna wspaniałego smaku</p>
-    <a class="btn btn-primary btn-lg" href="index.html" role="button">Strona Główna</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Zobacz wszystkie przepisy</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Dodaj swój przepis</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Edytuj przepis</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Usuń przepis</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Kategorie przepisów</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Wyświetl przepis</a>
-    <form>
-        <div class="form-row align-items-center">
-            <div class="col-auto my-1">
-                <label class="mr-sm-2" for="foodCategory">Wybierz prosze kategorię przepisów</label>
-                <select class="custom-select mr-sm-2" id="foodCategory">
-                    <option "
-                            "
-                            >
-                    </option>
-                </select>
-            </div>
-            <div class="col-auto my-1">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
-    </form>
+    <a class="btn btn-primary btn-lg" href="http://localhost:8080/" role="button">Strona Główna</a>
+    <a class="btn btn-primary btn-lg" href="/cookbook/all" role="button">Zobacz wszystkie przepisy</a>
+    <a class="btn btn-primary btn-lg" href="/cookbook/add" role="button">Dodaj swój przepis</a>
+    <a class="btn btn-primary btn-lg" href="/cookbook/basic-update" role="button">Edytuj przepis</a>
+    <a class="btn btn-primary btn-lg" href="/cookbook/basic-delete" role="button">Usuń przepis</a>
+    <a class="btn btn-primary btn-lg" href="/cookbook/category" role="button">Kategorie przepisów</a>
+    <a class="btn btn-primary btn-lg" href="/cookbook/basic-show" role="button">Wyświetl przepis</a>
+    <p><label class="mr-sm-2">Wybierz prosze kategorię przepisów</label></p>
+    <a class="btn btn-info" href="/cookbook/category-american" role="button">Amerykańskie</a>
+    <a class="btn btn-info" href="/cookbook/category-british" role="button">Brytyjskie</a>
+    <a class="btn btn-info" href="/cookbook/category-french" role="button">Francuskie</a>
+    <a class="btn btn-info" href="/cookbook/category-italian" role="button">Włoskie</a>
+    <a class="btn btn-info" href="/cookbook/category-mediterranean" role="button">Śródziemnomorskie</a>
+    <a class="btn btn-info" href="/cookbook/category-mexican" role="button">Meksykańskie</a>
+    <a class="btn btn-info" href="/cookbook/category-polish" role="button">Polskie</a>
+    <a class="btn btn-info" href="/cookbook/category-sweet" role="button">Słodkie</a>
 </div>
 </body>
 </html>

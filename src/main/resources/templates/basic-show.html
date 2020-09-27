@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Wszystkie przepisy</title>
+    <title>Wirtualna strona kucharska</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
@@ -21,34 +21,11 @@
     <a class="btn btn-primary btn-lg" href="/cookbook/category" role="button">Kategorie przepisów</a>
     <a class="btn btn-primary btn-lg" href="/cookbook/basic-show" role="button">Wyświetl przepis</a>
 </div>
-<div style="text-align: center;">
-    <p class="lead">Lista wszystkich przepisów </p>
+
+<div class="list-group-item list-group-item-success" th:each="recip : ${all_recipe}">
+    <a th:href="@{/cookbook/findOne/{id}(id = ${recip.id})}">
+        <span th:text="${recip.dishName}"></span>
+    </a>
 </div>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th scope="col">Nr przepisu</th>
-        <th scope="col">Nazwa</th>
-        <th scope="col">Kategoria</th>
-        <th scope="col">Trudność</th>
-        <th scope="col">Czas</th>
-        <th scope="col"> Opis przygotowania</th>
-        <th scope="col">Składniki</th>
-        <th scope="col"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="recipe :${all_recipe}">
-        <td th:text="${recipe.getId()}"></td>
-        <td th:text="${recipe.getDishName()}"></td>
-        <td th:text="${recipe.getFoodCategory()}"></td>
-        <td th:text="${recipe.getDifficultyLevel()}"></td>
-        <td th:text="${recipe.getTime()}"></td>
-        <td th:text="${recipe.getPreparationDescription()}"></td>
-        <td th:text="${recipe.getIngredientsList()}"></td>
-        <th scope="row">min</th>
-    </tr>
-    </tbody>
-</table>
 </body>
 </html>
